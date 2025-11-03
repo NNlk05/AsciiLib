@@ -1,4 +1,5 @@
 import tkinter as tk
+
 END = tk.END
 
 class Game:
@@ -62,6 +63,7 @@ class Game:
                     0 <= x2a + x < self.width and 0 <= y2a + y < self.height):
                     self.content[y1a + y][x1a + x], self.content[y2a + y][x2a + x] =  self.content[y2a + y][x2a + x], self.content[y1a + y][x1a + x]
         self._refresh_area()
+    
 
 if __name__ == "__main__":
     game = Game()
