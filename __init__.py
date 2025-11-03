@@ -1,4 +1,5 @@
 import tkinter as tk
+import time
 END = tk.END
 
 class Game:
@@ -17,6 +18,7 @@ class Game:
             self.area.insert(END, "".join(row) + "\n")
         self.area.pack()
     
+    # HELPER METHODS #
     def _refresh_area(self):
         self.area.delete("1.0", END)
         for row in self.content:
@@ -26,8 +28,30 @@ class Game:
         x, y = xy
         if 0 <= x < self.width and 0 <= y < self.height:
             self.content[y][x] = char
-            self._refresh_area()
+        self._refresh_area()
+        
+    
+    # BASIC METHODS #
+    
+    def clear(self):
+        self.content = [[self.filler for _ in range(self.width)] for _ in range(self.height)]
+        self._refresh_area()
 
 if __name__ == "__main__":
     game = Game()
+    # animate filling using after to avoid blocking the mainloop
+    def fill_next(x=0, y=0):
+        if x >= game.width:
+            return
+        game.set_char((x, y), "*")
+        # advance coordinates
+        nx, ny = x, y + 1
+        if ny >= game.height:
+            nx += 1
+            ny = 0
+        # schedule next step at ~60 FPS
+        game.tk.after(int(1000 / 60), lambda: fill_next(nx, ny))
+
+    game.tk.after(0, fill_next)
     game.tk.mainloop()
+                
