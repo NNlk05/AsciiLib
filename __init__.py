@@ -17,6 +17,16 @@ class Game:
             self.area.insert(END, "".join(row) + "\n")
         self.area.pack()
     
+    def _refresh_area(self):
+        self.area.delete("1.0", END)
+        for row in self.content:
+            self.area.insert(END, "".join(row) + "\n")
+    
+    def set_char(self, xy=(0, 0), char=" "):
+        x, y = xy
+        if 0 <= x < self.width and 0 <= y < self.height:
+            self.content[y][x] = char
+            self._refresh_area()
 
 if __name__ == "__main__":
     game = Game()
