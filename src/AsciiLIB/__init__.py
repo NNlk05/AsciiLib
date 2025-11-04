@@ -89,17 +89,17 @@ class Game:
         
         self._refresh_area()
     
-    def _define_event_lisener(self, event, callback):
+    def _define_event_listener(self, event, callback):
         self.tk.bind(event, callback)
     
     def on_key_press(self, callback):
-        self._define_event_lisener("<KeyPress>", callback)
+        self._define_event_listener("<KeyPress>", callback)
     
     def on_key_release(self, callback):
-        self._define_event_lisener("<KeyRelease>", callback)
+        self._define_event_listener("<KeyRelease>", callback)
     
     def on_mouse_click(self, callback):
-        self._define_event_lisener("<Button>", callback)
+        self._define_event_listener("<Button>", callback)
     
     
 
