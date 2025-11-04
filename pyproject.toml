@@ -2,7 +2,7 @@
 requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
 [project]
-name = "Ascii-LIB"
+name = "AsciiLIB"
 version = "0.1.0"
 requires-python = ">= 3.1"
 authors = [
