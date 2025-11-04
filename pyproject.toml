@@ -11,7 +11,7 @@ authors = [
 description = "AsciiLIB is a simple Python library designed for developers looking to create retro-style text-based games and applications."
 readme = "README.md"
 license = "MIT"
-license-files = ["LICEN[CS]E*", "vendored/licenses/*.txt", "AUTHORS.md"]
+license-files = ["LICEN[CS]E*"]
 keywords = [
     "ascii",
     "ascii-art",
