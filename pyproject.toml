@@ -1,0 +1,52 @@
+[build-system]
+requires = ["flit_core >= 3.12.0, <4"]
+build-backend = "flit_core.buildapi"
+[project]
+name = "AsciiLIB"
+version = "0.1.0"
+requires-python = ">= 3.1"
+authors = [
+    {name = "NNlk05"}
+]
+description = "AsciiLIB is a simple Python library designed for developers looking to create retro-style text-based games and applications."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*", "vendored/licenses/*.txt", "AUTHORS.md"]
+keywords = [
+    "ascii",
+    "ascii-art",
+    "text-game",
+    "text-games",
+    "terminal",
+    "tui",
+    "console",
+    "retro",
+    "game-development",
+    "python",
+    "library",
+]
+
+classifiers = [
+    "Development Status :: 4 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Games/Entertainment",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/NNlk05/AsciiLIB"
+"Repository" = "https://github.com/NNlk05/AsciiLIB"
+"Documentation" = "https://github.com/NNlk05/AsciiLib/wiki"
+"Bug Tracker" = "https://github.com/NNlk05/AsciiLIB/issues"
+"Changelog" = "https://github.com/NNlk05/AsciiLIB/releases"
