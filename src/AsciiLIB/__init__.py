@@ -63,6 +63,44 @@ class Game:
                     0 <= x2a + x < self.width and 0 <= y2a + y < self.height):
                     self.content[y1a + y][x1a + x], self.content[y2a + y][x2a + x] =  self.content[y2a + y][x2a + x], self.content[y1a + y][x1a + x]
         self._refresh_area()
+
+    def draw_rectangle(self, top_left=(0, 0), bottom_right=None, border_char="#", fill_char=None):
+        if bottom_right is None:
+            bottom_right = (self.width - 1, self.height - 1)
+        x1, y1 = top_left
+        x2, y2 = bottom_right
+        
+        for x in range(x1, min(x2 + 1, self.width)):
+            if 0 <= y1 < self.height:
+                self.content[y1][x] = border_char
+            if 0 <= y2 < self.height:
+                self.content[y2][x] = border_char
+        
+        for y in range(y1, min(y2 + 1, self.height)):
+            if 0 <= x1 < self.width:
+                self.content[y][x1] = border_char
+            if 0 <= x2 < self.width:
+                self.content[y][x2] = border_char
+        
+        if fill_char is not None:
+            for y in range(y1 + 1, min(y2, self.height)):
+                for x in range(x1 + 1, min(x2, self.width)):
+                    self.content[y][x] = fill_char
+        
+        self._refresh_area()
+    
+    def _define_event_lisener(self, event, callback):
+        self.tk.bind(event, callback)
+    
+    def on_key_press(self, callback):
+        self._define_event_lisener("<KeyPress>", callback)
+    
+    def on_key_release(self, callback):
+        self._define_event_lisener("<KeyRelease>", callback)
+    
+    def on_mouse_click(self, callback):
+        self._define_event_lisener("<Button>", callback)
+    
     
 
 if __name__ == "__main__":
