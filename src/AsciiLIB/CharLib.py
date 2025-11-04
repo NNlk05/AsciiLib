@@ -1,4 +1,54 @@
 CharLib = {
+    """
+    AsciiLIB.CharLib module
+    Provides a centralized collection of Unicode glyphs commonly used for
+    terminal/console UIs, ASCII/box drawing, simple graphical elements in
+    text-based games, and related utilities.
+    Contents
+    - CharLib (dict): Top-level mapping from category name (str) to a mapping
+        of symbol name -> character. Typical categories include:
+            - "MAIN": Basic block and shape glyphs (blocks, squares, circles,
+                triangles, shading characters).
+            - "PIPE_ASCII": Simple ASCII fallbacks for box drawing (e.g. '-', '|',
+                '/', '\\', '+').
+            - "PIPE_EXTENDED": Extended box/pipe drawing characters (single, heavy,
+                double, rounded variants and crosses).
+            - "PIPE_BLOCKS": Quarter/half/full block glyphs for finer-grained
+                block graphics.
+            - "PIPE_EXTRAS": Additional line/edge/endpoint glyphs.
+            - "DOTS": Ellipses, middot, bullet characters.
+            - "ARROWS": Single and double arrow glyphs in multiple directions.
+            - "BRAILLE": Programmatically generated mapping of integer indices to
+                Unicode Braille Pattern characters (U+2800 + index). Keys for this
+                sub-dictionary are integers (1..255) and values are the corresponding
+                braille Unicode characters.
+    Usage examples
+    - Access a glyph by category and name:
+            block = CharLib["MAIN"]["BLOCK"]
+    - Iterate categories and glyphs:
+            for category, glyphs in CharLib.items():
+                    for name, ch in glyphs.items():
+                            print(category, name, ch)
+    - Use braille patterns:
+            braille_dot = CharLib["BRAILLE"][1]  # U+2801 (0x2800 + 1)
+    Notes and considerations
+    - All glyphs are Unicode characters. Ensure your environment/terminal/font
+        supports the desired Unicode glyphs (box drawing, braille, blocks) and
+        that your source file and runtime use UTF-8 encoding.
+    - The BRAILLE mapping is generated from the Unicode braille block by
+        adding an offset (0x2800). The implemented mapping starts at index 1
+        (0x2801) and covers the higher pattern values; index semantics follow
+        the module implementation.
+    - The module includes a small __main__ block that prints all categories
+        and glyphs when executed as a script; the CharLib mapping itself is
+        designed to be imported and used programmatically.
+    - This structure is intentionally simple and easily extensible: add new
+        categories or glyphs by updating the CharLib dictionary.
+    Intended use
+    - Creating text-based user interfaces, box-drawn layouts, minimal graphical
+        representations in terminal games, and other situations where consistent
+        references to special characters are helpful.
+    """
     "MAIN": {
         "BLANK": " ",
         "LIGHT_SHADE": "░",
