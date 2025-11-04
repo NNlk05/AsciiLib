@@ -4,6 +4,102 @@ from CharLib import CharLib
 END = tk.END
 
 class Game:
+    """
+    Game(width=128, height=171, filler=" ", title="AsciiLIB Game")
+    A simple ASCII "game" surface implemented on top of a Tkinter Text widget.
+    The Game class manages a 2D character buffer (content) and renders it into
+    a Tk Text widget. Coordinates are (x, y) with (0, 0) at the top-left corner;
+    x is the column index and y is the row index.
+    Parameters
+    ----------
+    width : int, optional
+        Number of columns in the game surface (default 128).
+    height : int, optional
+        Number of rows in the game surface (default 171).
+    filler : str, optional
+        Single-character string used to initialize empty cells (default " ").
+    title : str, optional
+        Window title for the underlying Tk root (default "AsciiLIB Game").
+    Attributes
+    ----------
+    width : int
+        Surface width (number of columns).
+    height : int
+        Surface height (number of rows).
+    filler : str
+        Character used to initialize and clear the surface.
+    tk : tkinter.Tk
+        The Tk root window created for the game.
+    area : tkinter.Text
+        The Text widget used to display the ASCII surface. Configured with a
+        monospaced font and black background by default.
+    content : list[list[str]]
+        2D list of characters representing the surface content. Indexed as
+        content[y][x].
+    Behavior summary
+    ----------------
+    - The text widget is filled by joining each row (list of characters) with
+      no separator and appending a newline. The helper method _refresh_area()
+      clears and re-inserts the entire content into the Text widget.
+    - All public drawing/modification methods call _refresh_area() after
+      performing changes, so the displayed text always reflects the buffer.
+    - Coordinates and rectangles are clamped to the surface bounds where appropriate.
+    Public methods
+    --------------
+    set_char(xy=(0, 0), char=" ")
+        Set the single character at position (x, y) if the coordinates are within
+        bounds. The display is refreshed after the change.
+    clear()
+        Reset the entire surface to the filler character and refresh the display.
+    fill_area(top_left=(0, 0), bottom_right=None, char=" ")
+        Fill a rectangular region (inclusive) with the provided char. If
+        bottom_right is None, the region covers to the bottom-right corner of
+        the surface. Coordinates outside the surface are ignored/clamped.
+    swap_area(top_left1=(0, 0), bottom_right1=None, top_left2=(0, 0))
+        Swap the contents of two rectangular regions of the same size. The first
+        rectangle is defined by top_left1 and bottom_right1 (inclusive).
+        If bottom_right1 is None, the first rectangle defaults to the entire
+        surface. The second rectangle's top-left is top_left2; its size is taken
+        from the first rectangle. Only overlapping in-bounds cells are swapped.
+        The display is refreshed after the operation.
+    draw_rectangle(top_left=(0, 0), bottom_right=None, border_char="#", fill_char=None)
+        Draw a rectangle border using border_char. If bottom_right is None, the
+        rectangle extends to the bottom-right corner of the surface. If
+        fill_char is provided (not None), the rectangle interior (exclusive of
+        the border) is filled with fill_char. Coordinates are inclusive and
+        clamped to surface bounds. The display is refreshed after the draw.
+    on_key_press(callback)
+        Register a callback for Tk "<KeyPress>" events. The callback will
+        receive the Tk event object.
+    on_key_release(callback)
+        Register a callback for Tk "<KeyRelease>" events.
+    on_mouse_click(callback)
+        Register a callback for Tk "<Button>" (mouse click) events.
+    Notes and usage tips
+    --------------------
+    - This class creates a Tk root (self.tk) but does not call mainloop().
+      After constructing Game and attaching any event callbacks, you must call
+      game.tk.mainloop() (or integrate into your own Tk mainloop) to start the UI.
+    - Rendering strategy: the entire Text widget is cleared and repopulated on
+      each change. For very large surfaces or frequent updates, this may be
+      inefficient; consider batching updates or modifying the Text widget more
+      incrementally if performance is a concern.
+    - No explicit validation is performed on characters passed in (char,
+      border_char, fill_char). It is assumed these are single-character strings.
+    - swap_area computes width and height as inclusive differences between the
+      two corners; ensure the intended rectangle sizes and positions do not
+      overlap incorrectly when swapping.
+    - The coordinate system and rectangle endpoints are inclusive: both x1 and x2,
+      y1 and y2, if provided, are treated as part of the rectangle.
+    Example
+    -------
+    >>> game = Game(width=40, height=10, filler='.')
+    >>> game.set_char((5, 2), '@')
+    >>> game.draw_rectangle((1,1), (10,5), border_char='*', fill_char=' ')
+    >>> game.fill_area((15,2), (20,4), '#')
+    >>> game.on_key_press(lambda e: print('Pressed', e.keysym))
+    >>> game.tk.mainloop()
+    """
     def __init__(self, width=128, height=171, filler=" ", title="AsciiLIB Game"):
         self.width = width
         self.height = height
@@ -90,6 +186,8 @@ class Game:
         
         self._refresh_area()
     
+    # EVENT LISTENERS #
+
     def _define_event_listener(self, event, callback):
         self.tk.bind(event, callback)
     
