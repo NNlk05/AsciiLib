@@ -107,7 +107,7 @@ class Game:
         
         self.tk = tk.Tk()
         self.tk.title(title)
-        self.area = tk.Text(self.tk, width=self.width, height=self.height, font=("Courier", 10), fg="white", bg="black", state=tk.DISABLED)
+        self.area = tk.Text(self.tk, width=self.width, height=self.height, font=("Courier", 10), fg="white", bg="black")
         
         self.content = [[self.filler for _ in range(self.width)] for _ in range(self.height)]
         for row in self.content:
