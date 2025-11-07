@@ -1,2 +1,2 @@
-from . import Game
-from . import CharLib
+from .Game import Game
+from .CharLib import CharLib
