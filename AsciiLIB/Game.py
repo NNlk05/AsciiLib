@@ -1,5 +1,4 @@
 import tkinter as tk
-from CharLib import CharLib
 
 END = tk.END
 

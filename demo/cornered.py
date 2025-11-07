@@ -1,6 +1,4 @@
-import sys.path as pth
-pth.append('../AsciiLIB/')
-
 import AsciiLIB as asl
+import AsciiLIB.CharLib as cl
 
-game = asl.Game(8, 8, CharLib["MAIN"]["BLOCK"], "Cornered")
+game = asl.Game(8, 8, cl.CharLib["MAIN"]["BLOCK"], "Cornered")
