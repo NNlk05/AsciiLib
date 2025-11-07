@@ -1,4 +1,3 @@
-CharLib = {
     """
     AsciiLIB.CharLib module
     Provides a centralized collection of Unicode glyphs commonly used for
@@ -49,6 +48,8 @@ CharLib = {
         representations in terminal games, and other situations where consistent
         references to special characters are helpful.
     """
+
+CharLib = {
     "MAIN": {
         "BLANK": " ",
         "LIGHT_SHADE": "░",
