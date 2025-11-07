@@ -185,6 +185,12 @@ class Game:
         
         self._refresh_area()
     
+    def get_char(self, xy=(0, 0)):
+        x, y = xy
+        if 0 <= x < self.width and 0 <= y < self.height:
+            return self.content[y][x]
+        return None
+    
     # EVENT LISTENERS #
 
     def _define_event_listener(self, event, callback):
