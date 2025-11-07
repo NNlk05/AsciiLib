@@ -143,7 +143,7 @@ class Game:
                 self.content[y][x] = char
         self._refresh_area()
     
-    def swap_area(self, top_left1=(0, 0), bottom_right1=None, top_left2=(0, 0)):
+    def swap_areas(self, top_left1=(0, 0), bottom_right1=None, top_left2=(0, 0)):
         if bottom_right1 is None:
             bottom_right1 = (self.width - 1, self.height - 1)
         x1a, y1a = top_left1
