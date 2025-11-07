@@ -107,18 +107,22 @@ class Game:
         
         self.tk = tk.Tk()
         self.tk.title(title)
-        self.area = tk.Text(self.tk, width=self.width, height=self.height, font=("Courier", 10), fg="white", bg="black", state=tk.DISABLED)
+        self.area = tk.Text(self.tk, width=self.width, height=self.height, font=("Courier", 10), fg="black", bg="white", state=tk.DISABLED)
         
         self.content = [[self.filler for _ in range(self.width)] for _ in range(self.height)]
+        self.area.config(state=tk.NORMAL)
         for row in self.content:
             self.area.insert(END, "".join(row) + "\n")
         self.area.pack()
+        self.area.config(state=tk.DISABLED)
     
     # HELPER METHODS #
     def _refresh_area(self):
+        self.area.config(state=tk.NORMAL)
         self.area.delete("1.0", END)
         for row in self.content:
             self.area.insert(END, "".join(row) + "\n")
+        self.area.config(state=tk.DISABLED)
     
     def set_char(self, xy=(0, 0), char=" "):
         x, y = xy
