@@ -1,6 +1,6 @@
 import sys.path as pth
 pth.append('../AsciiLIB/')
 
-import AsciiLIB as asc
+import AsciiLIB as asl
 
-game = asc.Game()
+game = asl.Game(8, 8, CharLib["MAIN"]["BLOCK"], "Cornered")
